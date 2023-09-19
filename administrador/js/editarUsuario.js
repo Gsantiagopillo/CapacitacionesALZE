@@ -52,7 +52,7 @@ export function usuarioToEdit(e) {
   )
     return;
 
-  let id = e.target.getAttribute("data-id");
+  let id = e.target.getAttribute("data-id-edit");
   sessionStorage.setItem("usuarioToEdit", id);
   location.replace(`${DOMAIN}administrador/editarUsuario.html`);
 }

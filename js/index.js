@@ -6,6 +6,7 @@ import headerAdmin from "../administrador/js/headerAdmin.js";
 import headerAdminMark from "../administrador/js/headeradminMark.js";
 import infoDepartamento from "../administrador/js/infoDepartamento.js";
 import infoEmpresa from "../administrador/js/infoEmpresa.js";
+import infoUsuario from "../administrador/js/infoUsuario.js";
 import listadoDepartamentos, {
   departamentoToEdit,
 } from "../administrador/js/listadoDepartamentos.js";
@@ -57,4 +58,5 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   listadoDepartamentos();
   infoDepartamento();
   infoEmpresa();
+  infoUsuario();
 });

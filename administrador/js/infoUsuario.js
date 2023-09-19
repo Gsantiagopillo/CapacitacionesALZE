@@ -11,18 +11,29 @@ export default async function infoUsuario() {
   )
     return;
 
-  const usuario = sessionStorage.getItem("usuarioToEdit");
-
-  const empresa = sessionStorage.getItem("idEmpresaGO");
+  const usuario = sessionStorage.getItem("usuarioToEdit") || "0";
 
   const formData = new FormData();
-  formData.append("id", empresa);
+  formData.append("id", usuario);
   let options = {
     method: "POST",
     body: formData,
   };
 
-  let res = await helpHttp().post(`${EMPRESAS}getEmpresa.php`, options);
+  let res = await helpHttp().post(`${USERS}getUsuario.php`, options);
 
   console.log(res);
+
+  if (res === null) {
+    alert("Ocurrio un error, vuleva a intentarlo");
+    return;
+  }
+
+  const $form = d.getElementById("form-edit-user");
+
+  if ($form["id-usuario"]) $form["id-usuario"].value = res["id"];
+
+  $form["nombre"].value = res.nombre;
+  $form["apellido-paterno"].value = res["apellido_paterno"];
+  $form["apellido-materno"].value = res["apellido_materno"];
 }
