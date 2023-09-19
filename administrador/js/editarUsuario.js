@@ -2,7 +2,7 @@ import api from "../../helpers/app.js";
 import { helpHttp } from "../../helpers/helpHttp.js";
 
 const d = document;
-const { ADMINS, USERS } = api;
+const { ADMINS, USERS, DOMAIN } = api;
 
 export default async function editarUsuario(e) {
   if (!e.target.matches("#form-edit-empresa")) return;
@@ -53,6 +53,6 @@ export function usuarioToEdit(e) {
     return;
 
   let id = e.target.getAttribute("data-id");
-  sessionStorage.setItem("idEmpresaGO", id);
-  location.replace(`${DOMAIN}administrador/editarEmpresa.html`);
+  sessionStorage.setItem("usuarioToEdit", id);
+  location.replace(`${DOMAIN}administrador/editarUsuario.html`);
 }

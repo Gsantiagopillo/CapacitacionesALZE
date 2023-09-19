@@ -1,6 +1,7 @@
 import editarEmpresa, {
   empresaToEdit,
 } from "../administrador/js/editarEmpresa.js";
+import { usuarioToEdit } from "../administrador/js/editarUsuario.js";
 import headerAdmin from "../administrador/js/headerAdmin.js";
 import headerAdminMark from "../administrador/js/headeradminMark.js";
 import infoDepartamento from "../administrador/js/infoDepartamento.js";
@@ -40,6 +41,7 @@ d.addEventListener("click", (e) => {
   empresaToEdit(e);
   goToEmpresa(e);
   departamentoToEdit(e);
+  usuarioToEdit(e);
 });
 
 d.addEventListener("change", (e) => {
