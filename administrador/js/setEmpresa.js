@@ -5,10 +5,10 @@ const d = document;
 
 const { DOMAIN, EMPRESAS, USUARIOS } = api;
 
-export default async function setEmpresa() {
+export default async function setEmpresa(band = "") {
   if (
     location.pathname.includes("/registrarUsuario.html") ||
-    location.pathname.includes("/editarUsuario.html") ||
+    band.includes("editarUsuario") ||
     location.pathname.includes("/registrarEstudiante.html") ||
     location.pathname.includes("/registrarDepartamento.html")
   ) {
