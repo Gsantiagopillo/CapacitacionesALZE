@@ -1,4 +1,5 @@
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
+import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
 import deleteUsuario from "../administrador/js/deleteUsuario.js";
 import editarDepartamento from "../administrador/js/editarDepartamento.js";
 import editarEmpresa, {
@@ -55,6 +56,7 @@ d.addEventListener("click", (e) => {
   departamentoToEdit(e);
   usuarioToEdit(e);
   deleteUsuario(e);
+  deleteEmpresa(e);
   deleteDepartamento(e);
 });
 

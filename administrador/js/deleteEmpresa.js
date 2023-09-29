@@ -2,19 +2,19 @@ import api from "../../helpers/app.js";
 import { helpHttp } from "../../helpers/helpHttp.js";
 
 const d = document;
-const { USERS, DEPTOS, ADMINS } = api;
+const { USERS, DEPTOS, EMPRESAS, ADMINS } = api;
 
-export default async function deleteDepartamento(e) {
+export default async function deleteEmpresa(e) {
   if (
-    !e.target.matches("#td-depto-delete") &&
-    !e.target.matches("#td-depto-delete *")
+    !e.target.matches("#td-empresa-delete") &&
+    !e.target.matches("#td-empresa-delete *")
   )
     return;
 
   let confirmar = false;
 
   confirmar = confirm(
-    "Si elimina el departemento, tambien se eliminarán los usuarios que pertenencen a el. \n ¿Desea continuar?"
+    "Si elimina la empresa, tambien se eliminarán los departamamentos y usuarios que pertenencen a ella. \n ¿Desea continuar?"
   );
 
   if (!confirmar) return;
@@ -34,7 +34,7 @@ export default async function deleteDepartamento(e) {
   };
 
   let resUsers = await helpHttp().post(
-    `${USERS}deleteUsuariosDepto.php`,
+    `${USERS}deleteUsuariosEmpresa.php`,
     options
   );
 
@@ -43,14 +43,24 @@ export default async function deleteDepartamento(e) {
     $load.style.display = "none";
     return;
   }
+  let resDeptos = await helpHttp().post(
+    `${DEPTOS}deleteDeptosEmpresa.php`,
+    options
+  );
 
-  let res = await helpHttp().post(`${DEPTOS}deleteDepartamento.php`, options);
+  if (resDeptos.err) {
+    alert(`Error al eliminar departamentos`);
+    $load.style.display = "none";
+    return;
+  }
+
+  let res = await helpHttp().post(`${EMPRESAS}deleteEmpresa.php`, options);
 
   if (!res.err) {
-    alert(`Departamento eliminado`);
+    alert(`Empresa eliminada`);
     location.replace(`${ADMINS}indexadmin.html`);
   } else {
     $load.style.display = "none";
-    alert("ocurrio un error al eliminar el departamento");
+    alert("ocurrio un error al eliminar la empresa");
   }
 }

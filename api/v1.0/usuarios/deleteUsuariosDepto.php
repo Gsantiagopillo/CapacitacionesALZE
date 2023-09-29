@@ -1,6 +1,6 @@
 <?php
 require "../conexion.php";
-$idDepto = $_POST['idDepto'];
+$idDepto = $_POST['id'];
 
 $delete = mysqli_query($mysqli, "delete from usuarios where id_departamento ='$idDepto'");
 
