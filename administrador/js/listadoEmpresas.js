@@ -34,6 +34,7 @@ export default async function listadoEmpresas() {
 
     $td1.appendChild($logo);
     $logo.setAttribute("src", `${DOMAIN}assets/empresas/${el.logo}`);
+    $logo.setAttribute("data-id", el.id);
     $logo.classList.add("td-img");
     $td1.setAttribute("data-id", el.id);
     $td1.id = "td-empresa";

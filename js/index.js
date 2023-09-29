@@ -1,7 +1,12 @@
+import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
+import deleteUsuario from "../administrador/js/deleteUsuario.js";
+import editarDepartamento from "../administrador/js/editarDepartamento.js";
 import editarEmpresa, {
   empresaToEdit,
 } from "../administrador/js/editarEmpresa.js";
-import { usuarioToEdit } from "../administrador/js/editarUsuario.js";
+import editarUsuario, {
+  usuarioToEdit,
+} from "../administrador/js/editarUsuario.js";
 import headerAdmin from "../administrador/js/headerAdmin.js";
 import headerAdminMark from "../administrador/js/headeradminMark.js";
 import infoDepartamento from "../administrador/js/infoDepartamento.js";
@@ -34,6 +39,8 @@ d.addEventListener("submit", (e) => {
   RegitrarEstudiante(e);
   RegitrarUsuario(e);
   editarEmpresa(e);
+  editarDepartamento(e);
+  editarUsuario(e);
 });
 
 d.addEventListener("click", (e) => {
@@ -43,6 +50,8 @@ d.addEventListener("click", (e) => {
   goToEmpresa(e);
   departamentoToEdit(e);
   usuarioToEdit(e);
+  deleteUsuario(e);
+  deleteDepartamento(e);
 });
 
 d.addEventListener("change", (e) => {

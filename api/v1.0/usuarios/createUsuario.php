@@ -31,7 +31,7 @@ while ($rowusers = $resultusers->fetch_assoc()) {
 
 $passw = password_hash($passw, PASSWORD_DEFAULT);
 
-$insert = mysqli_query($mysqli, "insert into usuarios(nombre, apellido_paterno, apellido_materno, correo,passw,id_empresa,id_departamento,puesto,id_rol) values ('$nombre','$apellidoPaterno','$apellidoMaterno','$correo','$passw','$idEmpresa','$idDepartamento','$puesto','$typeUser')");
+$insert = mysqli_query($mysqli, "insert into usuarios(nombre, apellido_paterno, apellido_materno, correo,passw,id_empresa,id_departamento,puesto,telefono,id_rol) values ('$nombre','$apellidoPaterno','$apellidoMaterno','$correo','$passw','$idEmpresa','$idDepartamento','$puesto','$telefono','$typeUser')");
 
 $res = array(
   "err" => !$insert,

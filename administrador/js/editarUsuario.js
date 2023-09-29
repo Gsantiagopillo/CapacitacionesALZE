@@ -2,46 +2,75 @@ import api from "../../helpers/app.js";
 import { helpHttp } from "../../helpers/helpHttp.js";
 
 const d = document;
-const { ADMINS, USERS, DOMAIN } = api;
+const { USERS, ADMINS, DOMAIN } = api;
 
 export default async function editarUsuario(e) {
-  if (!e.target.matches("#form-edit-empresa")) return;
+  if (!e.target.matches("#form-edit-user")) return;
 
   const $load = d.querySelector(".load");
   $load.style.display = "flex";
 
-  const $form = d.getElementById("form-edit-empresa"),
-    id = $form["id-empresa"].value,
-    nombre = $form.nombre.value;
+  const $form = d.getElementById("form-edit-user"),
+    idUsuario = $form["id-usuario"].value,
+    idEmpresa = $form.empresa.value,
+    idDepartamento = $form.departamento.value,
+    nombre = $form.nombre.value,
+    apellidoPaterno = $form["apellido-paterno"].value,
+    apellidoMaterno = $form["apellido-materno"].value,
+    puesto = $form.puesto.value,
+    telefono = $form.telefono.value,
+    correo = $form.correo.value,
+    passw = $form.passw.value,
+    tipo = $form.tipo.value;
+
+  if (
+    idEmpresa === "" ||
+    idEmpresa === "0" ||
+    idDepartamento === "0" ||
+    idDepartamento === ""
+  ) {
+    alert("debes seleccionar y llenar todos los campos");
+    $load.style.display = "none";
+    return;
+  }
 
   const formData = new FormData();
 
-  formData.append("id", id);
+  formData.append("idUsuario", idUsuario);
+  formData.append("empresa", idEmpresa);
+  formData.append("departamento", idDepartamento);
   formData.append("nombre", nombre);
-
-  if ($form.logo.files.length > 0) {
-    const logo = $form["logo"].files[0];
-    formData.append("logo", logo);
-  }
+  formData.append("apellidoPaterno", apellidoPaterno);
+  formData.append("apellidoMaterno", apellidoMaterno);
+  formData.append("puesto", puesto);
+  formData.append("telefono", telefono);
+  formData.append("correo", correo);
+  formData.append("tipo", tipo);
+  if (passw.length > 0) formData.append("passw", passw);
 
   let options = {
     method: "POST",
     body: formData,
   };
 
-  let res = await helpHttp().post(`${EMPRESAS}editEmpresa.php`, options);
+  // for (const value of formData.values()) {
+  //   console.log(value);
+  // }
+
+  let res = await helpHttp().post(`${USERS}editUsuario.php`, options);
 
   if (!res.err) {
     if (res["update"] === false) {
-      alert(res.statusText);
+      alert("correo ya existente");
       $load.style.display = "none";
       return;
     }
-    alert(`Empresa: ${res.nombre} actualizada`);
+
+    alert(`Usuario: ${res.nombre} actualizado`);
     location.replace(`${ADMINS}indexadmin.html`);
   } else {
-    alert("ocurrio un error al actualizar la empresa");
     $load.style.display = "none";
+    alert("ocurrio un error al actualizar el usuario");
   }
 }
 

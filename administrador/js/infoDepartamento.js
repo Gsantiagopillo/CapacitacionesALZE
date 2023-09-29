@@ -48,5 +48,6 @@ export default async function infoDepartamento() {
 
   $form["nombre"].value = res.nombre;
   $form["empresa"].value = empresa.nombre;
+  $form["empresa"].setAttribute("data-id", empresa.id);
   $form["empresa"].style.color = "black";
 }
