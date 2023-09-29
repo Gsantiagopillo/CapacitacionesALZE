@@ -19,6 +19,7 @@ import listadoEmpresas, {
   goToEmpresa,
 } from "../administrador/js/listadoEmpresas.js";
 import listadoUsuarios from "../administrador/js/listadoUsuarios.js";
+import registrarCurso from "../administrador/js/registrarCurso.js";
 import registrarDepartamento from "../administrador/js/registrarDepartamento.js";
 import registrarEmpresa from "../administrador/js/registrarEmpresa.js";
 import RegitrarEstudiante from "../administrador/js/registrarEstudiante.js";
@@ -38,6 +39,7 @@ d.addEventListener("submit", (e) => {
   registrarDepartamento(e);
   RegitrarEstudiante(e);
   RegitrarUsuario(e);
+  registrarCurso(e);
   editarEmpresa(e);
   editarDepartamento(e);
   editarUsuario(e);

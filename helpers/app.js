@@ -6,6 +6,7 @@ const DOMAIN = "http://localhost/capacitaciones/",
   EMPRESAS = `${API}empresas/`,
   DEPTOS = `${API}departamentos/`,
   USERS = `${API}usuarios/`,
+  CURSOS = `${API}cursos/`,
   ROLES = `${API}roles/`,
   KEY_SESSION = "GPO20231001";
 
@@ -19,5 +20,6 @@ export default {
   EMPRESAS,
   DEPTOS,
   USERS,
+  CURSOS,
   ROLES,
 };
