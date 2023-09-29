@@ -12,6 +12,7 @@ import headerAdminMark from "../administrador/js/headeradminMark.js";
 import infoDepartamento from "../administrador/js/infoDepartamento.js";
 import infoEmpresa from "../administrador/js/infoEmpresa.js";
 import infoUsuario from "../administrador/js/infoUsuario.js";
+import listadoCursos, { goToCurso } from "../administrador/js/listadoCursos.js";
 import listadoDepartamentos, {
   departamentoToEdit,
 } from "../administrador/js/listadoDepartamentos.js";
@@ -50,6 +51,7 @@ d.addEventListener("click", (e) => {
   headerAdmin(e);
   empresaToEdit(e);
   goToEmpresa(e);
+  goToCurso(e);
   departamentoToEdit(e);
   usuarioToEdit(e);
   deleteUsuario(e);
@@ -68,6 +70,7 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   listadoUsuarios();
   listadoDepartamentos();
   infoDepartamento();
+  listadoCursos();
   infoEmpresa();
   infoUsuario();
 });
