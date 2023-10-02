@@ -574,6 +574,10 @@ img {
     width: 100%;
   }
 
+  .form-create-item {
+    max-width: 50%;
+  }
+
   .menu-container-admin {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

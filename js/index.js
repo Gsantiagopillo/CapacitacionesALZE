@@ -20,11 +20,15 @@ import listadoDepartamentos, {
 import listadoEmpresas, {
   goToEmpresa,
 } from "../administrador/js/listadoEmpresas.js";
+import listadoTemas from "../administrador/js/listadoTemas.js";
 import listadoUsuarios from "../administrador/js/listadoUsuarios.js";
 import registrarCurso from "../administrador/js/registrarCurso.js";
 import registrarDepartamento from "../administrador/js/registrarDepartamento.js";
 import registrarEmpresa from "../administrador/js/registrarEmpresa.js";
 import RegitrarEstudiante from "../administrador/js/registrarEstudiante.js";
+import registrarTema, {
+  uploadTema,
+} from "../administrador/js/registrarTema.js";
 import RegitrarUsuario from "../administrador/js/registrarUsuario.js";
 import setDepartamento from "../administrador/js/setDepartamento.js";
 import setEmpresa from "../administrador/js/setEmpresa.js";
@@ -58,6 +62,8 @@ d.addEventListener("click", (e) => {
   deleteUsuario(e);
   deleteEmpresa(e);
   deleteDepartamento(e);
+  registrarTema(e);
+  uploadTema(e);
 });
 
 d.addEventListener("change", (e) => {
@@ -73,6 +79,7 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   listadoDepartamentos();
   infoDepartamento();
   listadoCursos();
+  listadoTemas();
   infoEmpresa();
   infoUsuario();
 });

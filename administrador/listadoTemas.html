@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css?v=1">
-  <title>Listado de departamentos</title>
+  <title>Listado de Temas</title>
 </head>
 
 <body>
@@ -21,15 +21,39 @@
 
   <main class="main-admin">
 
-    <h4 class="text-center fw-bold">Departamentos por empresa</h4>
+    <h4 class="text-center fw-bold">Temas del Curso</h4>
 
+
+
+    <section class="d-flex table section-add-temas justify-content-end">
+      <form class="form-create-item">
+        <template id="template-form-tema">
+          <div class="input-field">
+            <input placeholder="Nombre del Tema" id="tema" type="text" class="validate text-capitalize"
+              autocomplete="off" required>
+            <label for="tema" class="active">Tema</label>
+          </div>
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Img</span>
+              <input type="file" id="logo" accept="image/*" required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Selecciona la imagen del tema">
+            </div>
+        </template>
+      </form>
+      <a class="waves-effect waves-light btn d-none form-create-item" id="create-tema" style="margin-bottom: 2rem;"><i
+          class="material-icons right">send</i>Crear</a>
+      <a class="waves-effect waves-light btn " id="add-tema"><i class="material-icons right">add</i>Agregar</a>
+    </section>
     <table class="table striped centered responsive-table">
       <thead>
         <tr>
-          <th>Departamento</th>
-          <th>Empresa</th>
-          <th id="deptos-edit">Editar</th>
-          <th id="deptos-delete">Eliminar</th>
+          <th>Imagen</th>
+          <th>Tema</th>
+          <th id="temas-edit">Editar</th>
+          <th id="temas-delete">Eliminar</th>
         </tr>
       </thead>
       <tbody id="tbody">
