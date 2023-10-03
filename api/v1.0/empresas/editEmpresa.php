@@ -19,7 +19,7 @@ while ($rowempresas = $resultempresas->fetch_assoc()) {
   }
 }
 
-if (is_uploaded_file($_FILES['logo']['tmp_name'])) {
+if (isset($_FILES['logo'])) {
   $logo = $_FILES['logo']['name'];
   $ruta = "../../../assets/empresas/$logo";
   copy($_FILES['logo']['tmp_name'], $ruta);

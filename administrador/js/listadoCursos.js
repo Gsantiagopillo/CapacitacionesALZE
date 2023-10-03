@@ -30,7 +30,6 @@ export default async function listadoCursos() {
       $td2 = d.createElement("td"),
       $td3 = d.createElement("td"),
       $td4 = d.createElement("td"),
-      $td5 = d.createElement("td"),
       $logo = d.createElement("img");
 
     $td1.appendChild($logo);
@@ -48,9 +47,6 @@ export default async function listadoCursos() {
     $td4.innerHTML = `<img src="${DOMAIN}assets/archive-fill.svg" class="img-auto" alt="archive-fill" data-id-delete="${el.id}">`;
     $td4.setAttribute("data-id-delete", el.id);
     $td4.id = "td-curso-delete";
-    $td5.innerHTML = `<img src="${DOMAIN}assets/clipboard2-plus.svg" class="img-auto" alt="archive-fill" data-id-register="${el.id}">`;
-    $td5.setAttribute("data-id-register", el.id);
-    $td5.id = "td-curso-register";
 
     $tr.appendChild($td1);
     $tr.appendChild($td2);
@@ -58,7 +54,6 @@ export default async function listadoCursos() {
     if (type_user === "1") {
       $tr.appendChild($td3);
       $tr.appendChild($td4);
-      $tr.appendChild($td5);
     } else {
       d.getElementById("cursos-edit").style.display = "none";
       d.getElementById("cursos-delete").style.display = "none";
