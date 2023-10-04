@@ -57,7 +57,6 @@ export default async function listadoCursos() {
     } else {
       d.getElementById("cursos-edit").style.display = "none";
       d.getElementById("cursos-delete").style.display = "none";
-      d.getElementById("cursos-register").style.display = "none";
     }
 
     $tr.classList.add("cursor-pointer");

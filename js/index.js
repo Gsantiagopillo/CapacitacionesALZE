@@ -6,7 +6,7 @@ import editarDepartamento from "../administrador/js/editarDepartamento.js";
 import editarEmpresa, {
   empresaToEdit,
 } from "../administrador/js/editarEmpresa.js";
-import editarTema from "../administrador/js/editarTema.js";
+import editarTema, { temaToEdit } from "../administrador/js/editarTema.js";
 import editarUsuario, {
   usuarioToEdit,
 } from "../administrador/js/editarUsuario.js";
@@ -17,6 +17,7 @@ import infoDepartamento from "../administrador/js/infoDepartamento.js";
 import infoEmpresa from "../administrador/js/infoEmpresa.js";
 import infoTema from "../administrador/js/infoTema.js";
 import infoUsuario from "../administrador/js/infoUsuario.js";
+import listadoActividades from "../administrador/js/listadoActividades.js";
 import listadoCursos, { goToCurso } from "../administrador/js/listadoCursos.js";
 import listadoDepartamentos, {
   departamentoToEdit,
@@ -24,7 +25,7 @@ import listadoDepartamentos, {
 import listadoEmpresas, {
   goToEmpresa,
 } from "../administrador/js/listadoEmpresas.js";
-import listadoTemas, { temaToEdit } from "../administrador/js/listadoTemas.js";
+import listadoTemas, { goToTema } from "../administrador/js/listadoTemas.js";
 import listadoUsuarios from "../administrador/js/listadoUsuarios.js";
 import registrarCurso from "../administrador/js/registrarCurso.js";
 import registrarDepartamento from "../administrador/js/registrarDepartamento.js";
@@ -72,6 +73,7 @@ d.addEventListener("click", (e) => {
   uploadTema(e);
   cursoToEdit(e);
   temaToEdit(e);
+  goToTema(e);
 });
 
 d.addEventListener("change", (e) => {
@@ -92,4 +94,5 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   infoUsuario();
   infoCurso();
   infoTema();
+  listadoActividades();
 });

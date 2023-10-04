@@ -97,18 +97,9 @@ export default async function listadoTemas() {
   d.getElementById("tbody").appendChild($fragmento);
 }
 
-export function temaToEdit(e) {
-  if (
-    !e.target.matches("#td-tema-edit") &&
-    !e.target.matches("#td-tema-edit *")
-  )
-    return;
+export function goToTema(e) {
+  if (!e.target.matches("#td-tema") && !e.target.matches("#td-tema *")) return;
   let id = e.target.getAttribute("data-id");
   sessionStorage.setItem("idTemaGO", id);
-  location.replace(`${ADMINS}editarTema.html`);
+  location.replace(`${ADMINS}listadoActividades.html`);
 }
-
-d.addEventListener("click", (e) => {
-  if (!e.target.matches("#add-tema") && !e.target.matches("#add-tema *"))
-    return;
-});
