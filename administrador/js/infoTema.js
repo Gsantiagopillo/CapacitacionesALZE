@@ -14,7 +14,7 @@ export default async function infoTema() {
   const tema = sessionStorage.getItem("idTemaGO");
 
   const formData = new FormData();
-  formData.append("id", tema);
+  formData.append("idTema", tema);
   let options = {
     method: "POST",
     body: formData,

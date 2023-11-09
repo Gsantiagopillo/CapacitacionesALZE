@@ -58,5 +58,5 @@ export function temaToEdit(e) {
 
   let id = e.target.getAttribute("data-id");
   sessionStorage.setItem("idTemaGO", id);
-  location.replace(`${ADMINS}/editarTema.html`);
+  location.replace(`${ADMINS}editarTema.html`);
 }
