@@ -16,7 +16,7 @@ export default async function listadoActividades() {
 
   const formData = new FormData();
 
-  formData.append("id", idTema);
+  formData.append("idTema", idTema);
 
   let options = {
     method: "POST",
@@ -24,7 +24,10 @@ export default async function listadoActividades() {
   };
 
   let tema = await helpHttp().post(`${TEMAS}getTema.php`, options);
-  let activities = await helpHttp().post(`${ACTIVIDADES}getActividades.php`);
+  let activities = await helpHttp().post(
+    `${ACTIVIDADES}getActividades.php`,
+    options
+  );
 
   if (Object.keys(tema).length === 0 || tema.err) {
     alert("Ocurrio un error, vuleva a intentarlo");

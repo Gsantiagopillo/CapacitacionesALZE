@@ -3,71 +3,141 @@ import { helpHttp } from "../../helpers/helpHttp.js";
 
 const d = document;
 
-const { ACTIVIDADES } = api;
+const { ACTIVIDADES, ADMINS } = api;
 
-let idCurso;
+let idTema;
 
-export default async function registrarTema(e) {
-  if (!e.target.matches("#add-tema") && !e.target.matches("#add-tema *"))
+export default async function registrarActividad(e) {
+  if (
+    !e.target.matches("#add-activity") &&
+    !e.target.matches("#add-activity *")
+  )
     return;
-
-  const $btnAdd = d.getElementById("add-tema"),
-    $btnCreate = d.getElementById("create-tema"),
-    $sectionCreate = d.querySelector(".section-add-temas");
-
-  $btnAdd.classList.toggle("d-none");
-  $btnCreate.classList.toggle("d-none");
-
-  idCurso = sessionStorage.getItem("idCursoGO") || 0;
-
-  const $template = d.getElementById("template-form-tema").content;
-  const $formCreate = d.querySelector(".form-create-item");
-
-  let $clone = d.importNode($template, true);
-  $formCreate.appendChild($clone);
-
-  $sectionCreate.classList.add("flex-column");
-  $sectionCreate.classList.remove("justify-content-end");
+  location.replace(`${ADMINS}registrarActividad.html`);
 }
 
-export async function uploadTema(e) {
-  if (!e.target.matches("#create-tema") && !e.target.matches("#create-tema *"))
-    return;
+export async function uploadActividad(e) {
+  console.log("ENTRE");
+  if (!e.target.matches("#form-create-activity")) return;
 
-  const $formCreate = d.querySelector(".form-create-item");
-  const nombreTema = d.getElementById("tema").value,
-    logo = $formCreate["logo"].files[0];
+  idTema = sessionStorage.getItem("idTemaGO");
 
-  if (nombreTema === "" || $formCreate["logo"].files.length === 0) {
-    alert("debes llenar todos los campos");
-    return;
-  }
+  const $formCreate = d.getElementById("form-create-activity");
+  const nombreActividad = d.getElementById("nombre").value,
+    videoAct = $formCreate["video"].files[0],
+    descripcionAct = d.getElementById("description").value;
+
   d.querySelector(".load").style.display = "flex";
 
   const formData = new FormData();
-  formData.append("idCurso", idCurso);
-  formData.append("tema", nombreTema);
-  formData.append("img", logo);
+  formData.append("idTema", idTema);
+  formData.append("actividad", nombreActividad);
+  formData.append("descAct", descripcionAct);
+  formData.append("videoAct", videoAct);
 
   let options = {
     method: "POST",
     body: formData,
+    headers: { "enc-type": "multipart/form-data" },
   };
 
-  let res = await helpHttp().post(`${TEMAS}createTema.php`, options);
+  let res = await helpHttp().post(`${ACTIVIDADES}createActividad.php`, options);
   console.log(res);
 
-  if (res.err) {
-    alert("ocurrio un error");
-    return;
-  }
-
-  if (res["insert"] === false) {
+  if (res.err === true) {
     alert(res.statusText);
     $load.style.display = "none";
     return;
   }
+
+  let id_actividad = res.actividad;
+
+  let $childrens = d.getElementById("task-container").children;
+  let bandEnt = false;
+
+  for (let i = 0; i < $childrens.length; i++) {
+    let $child;
+    $child = $childrens[i];
+
+    const formData2 = new FormData();
+    formData2.append("idActividad", id_actividad);
+    formData2.append("nombre", $child.querySelector("#name-task").value);
+    formData2.append("desc", $child.querySelector("#desc-task").value);
+    formData2.append("file", $child.querySelector("#file-task").files[0]);
+
+    let options = {
+      method: "POST",
+      body: formData2,
+      headers: { "enc-type": "multipart/form-data" },
+    };
+
+    let res = await helpHttp().post(
+      `${ACTIVIDADES}createEntregable.php`,
+      options
+    );
+    console.log(res);
+
+    if (res.err === true) {
+      bandEnt = true;
+      alert(
+        `${res.statusText}, en: ${$child.querySelector("#name-task").value}`
+      );
+      $load.style.display = "none";
+      break;
+    }
+  }
+
+  if (bandEnt) return;
+
+  let $childrensAsks = d.getElementById("asks-container").children;
+  let bandForm = false;
+
+  for (let i = 0; i < $childrensAsks.length; i++) {
+    let $childAsk;
+
+    $childAsk = $childrensAsks[i];
+
+    const formData3 = new FormData();
+    formData3.append("idActividad", id_actividad);
+    formData3.append("pregunta", $childAsk.querySelector("#name-ask").value);
+    formData3.append("ans1", $childAsk.querySelector("#answer-1").value);
+    formData3.append("ans2", $childAsk.querySelector("#answer-2").value);
+    formData3.append("ans3", $childAsk.querySelector("#answer-3").value);
+    formData3.append(
+      "anscorrect",
+      $childAsk.querySelector("#answer-correct").value
+    );
+
+    console.log("idActividad", id_actividad);
+    console.log("pregunta", $childAsk.querySelector("#name-ask").value);
+    console.log("ans1", $childAsk.querySelector("#answer-1").value);
+    console.log("ans2", $childAsk.querySelector("#answer-2").value);
+    console.log("ans3", $childAsk.querySelector("#answer-3").value);
+    console.log("anscorrect", $childAsk.querySelector("#answer-correct").value);
+
+    let options = {
+      method: "POST",
+      body: formData3,
+    };
+
+    let res = await helpHttp().post(
+      `${ACTIVIDADES}createFormulario.php`,
+      options
+    );
+    console.log(res);
+
+    if (res.err === true) {
+      bandForm = true;
+      alert(
+        `${res.statusText}, en: ${$childAsk.querySelector("#name-ask").value}`
+      );
+      $load.style.display = "none";
+      break;
+    }
+  }
+  if (bandEnt) return;
+
   d.querySelector(".load").style.display = "none";
-  alert(`Modelo creado: ${res.nombre}`);
+  alert(`Actividad Creada: ${res.nombre}`);
   location.reload();
 }

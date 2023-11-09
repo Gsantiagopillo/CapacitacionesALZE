@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Registrar Actividad</title>
+</head>
+
+<body>
+  <header data-include="./header.html"></header>
+
+  <main class="main-admin">
+
+    <h4 class="text-center fw-bold">Registrar Actividad</h4>
+    <form id="form-create-activity" class="form-info-vertical" autocomplete="off">
+      <p class="fw-bold">Tema: <span id="name-tema"></span></p>
+      <div class="input-field mt-25">
+        <input placeholder="Nombre Actividad" id="nombre" type="text" class="validate text-capitalize"
+          autocomplete="off" required>
+        <label for="nombre">Nombre Actividad</label>
+      </div>
+      <div class="input-field mt-25">
+        <input placeholder="Descripción de la Actividad" id="description" type="text" class="validate text-capitalize"
+          autocomplete="off" required>
+        <label for="description">Descripción de la Actividad</label>
+      </div>
+      <div class="file-field input-field mt-25">
+        <div class="btn">
+          <span>Video</span>
+          <input type="file" id="video" accept="video/*" required>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Selecciona el video de la actividad">
+        </div>
+      </div>
+      <h5 class="mt-25">Entregables:</h5>
+      <article id="task-container"></article>
+      <template id="template-form-task">
+        <section>
+          <article class="d-flex justify-content-between align-items-center">
+            <p>Entregable # <span id="num-task"></span></p>
+            <a class="btn-floating btn-small waves-effect waves-light red task-delete"><i
+                class="material-icons">delete</i></a>
+          </article>
+
+          <div class="input-field mt-25">
+            <input placeholder="Nombre Entregable" id="name-task" type="text" class="validate text-capitalize"
+              autocomplete="off" required>
+            <label for="name-task" class="active">Nombre Entregable</label>
+          </div>
+          <div class="input-field mt-25">
+            <textarea id="desc-task" class="materialize-textarea"></textarea>
+            <label for="desc-task">Descripción del Entregable</label>
+          </div>
+          <div class="file-field input-field mt-25">
+            <div class="btn">
+              <span>FILE</span>
+              <input type="file" id="file-task" required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Selecciona el archivo del entregable">
+            </div>
+          </div>
+          <hr>
+        </section>
+      </template>
+      <article class="mt-25 d-flex justify-content-end">
+        <a class="waves-effect waves-light btn " id="add-task"><i class="material-icons right">add</i>Agregar
+          Entregable</a>
+      </article>
+
+      <h5 class="mt-25">Cuestionario:</h5>
+
+      <article id="asks-container"></article>
+
+      <template id="template-form-ask">
+        <section>
+          <article class="d-flex justify-content-between align-items-center">
+            <p>Pregunta # <span id="num-ask"></span></p>
+            <a class="btn-floating btn-small waves-effect waves-light red ask-delete"><i
+                class="material-icons">delete</i></a>
+          </article>
+
+          <div class="input-field mt-25">
+            <input placeholder="pregunta" id="name-ask" type="text" class="validate text-capitalize" autocomplete="off"
+              required>
+            <label for="name-ask" class="active">Escriba la Pregunta</label>
+          </div>
+          <article class="create-answer">
+            <div class="input-field ">
+              <input placeholder="" id="answer-1" type="text" class="validate text-capitalize" value="A)"
+                autocomplete="off" required>
+            </div>
+            <div class="input-field ">
+              <input placeholder="" id="answer-2" type="text" class="validate text-capitalize" value="B)"
+                autocomplete="off" required>
+            </div>
+            <div class="input-field ">
+              <input placeholder="" id="answer-3" type="text" class="validate text-capitalize" value="C)"
+                autocomplete="off" required>
+            </div>
+            <div class="input-field" style="align-self: flex-end;">
+              <select id="answer-correct">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+              <label>Respuesta Correcta</label>
+            </div>
+
+          </article>
+
+
+          <hr>
+        </section>
+      </template>
+
+      <article class="mt-25 d-flex justify-content-end">
+        <a class="waves-effect waves-light btn " id="add-ask"><i class="material-icons right">add</i>Agregar
+          Pregunta</a>
+      </article>
+
+
+      <button class="mt-25 btn waves-effect waves-ligh" type="submit">Crear
+        <i class="material-icons right">send</i>
+      </button>
+
+    </form>
+  </main>
+  <section class="load"><img src="../assets/puff.svg" alt="cargando"></section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems, {});
+    });
+  </script>
+  <script src="../js/index.js" type="module"></script>
+</body>
+
+
+</html>

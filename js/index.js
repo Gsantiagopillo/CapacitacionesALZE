@@ -1,3 +1,5 @@
+import addAsk from "../administrador/js/addAsk.js";
+import addTask from "../administrador/js/addTask.js";
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
 import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
 import deleteUsuario from "../administrador/js/deleteUsuario.js";
@@ -27,14 +29,21 @@ import listadoEmpresas, {
 } from "../administrador/js/listadoEmpresas.js";
 import listadoTemas, { goToTema } from "../administrador/js/listadoTemas.js";
 import listadoUsuarios from "../administrador/js/listadoUsuarios.js";
+import registrarActividad, {
+  uploadActividad,
+} from "../administrador/js/registrarActividad.js";
 import registrarCurso from "../administrador/js/registrarCurso.js";
-import registrarDepartamento from "../administrador/js/registrarDepartamento.js";
+import registrarDepartamento, {
+  uploadDepartamento,
+} from "../administrador/js/registrarDepartamento.js";
 import registrarEmpresa from "../administrador/js/registrarEmpresa.js";
 import RegitrarEstudiante from "../administrador/js/registrarEstudiante.js";
 import registrarTema, {
   uploadTema,
 } from "../administrador/js/registrarTema.js";
 import RegitrarUsuario from "../administrador/js/registrarUsuario.js";
+import removeAsk from "../administrador/js/removeAsk.js";
+import removeTask from "../administrador/js/removeTask.js";
 import setDepartamento from "../administrador/js/setDepartamento.js";
 import setEmpresa from "../administrador/js/setEmpresa.js";
 import login from "./login.js";
@@ -56,6 +65,7 @@ d.addEventListener("submit", (e) => {
   editarUsuario(e);
   editarCurso(e);
   editarTema(e);
+  uploadActividad(e);
 });
 
 d.addEventListener("click", (e) => {
@@ -68,12 +78,19 @@ d.addEventListener("click", (e) => {
   usuarioToEdit(e);
   deleteUsuario(e);
   deleteEmpresa(e);
+  registrarDepartamento(e);
+  uploadDepartamento(e);
   deleteDepartamento(e);
   registrarTema(e);
   uploadTema(e);
   cursoToEdit(e);
   temaToEdit(e);
   goToTema(e);
+  addTask(e);
+  removeTask(e);
+  addAsk(e);
+  removeAsk(e);
+  registrarActividad(e);
 });
 
 d.addEventListener("change", (e) => {
@@ -95,4 +112,6 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   infoCurso();
   infoTema();
   listadoActividades();
+  addTask();
+  addAsk();
 });

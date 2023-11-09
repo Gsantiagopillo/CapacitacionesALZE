@@ -1,7 +1,7 @@
 <?php
 require "../conexion.php";
 
-$id = $_POST['id'];
+$id = $_POST['idTema'];
 
 
 $sqltema = "select * from temas where id= '$id'";

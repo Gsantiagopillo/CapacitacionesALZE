@@ -52,6 +52,7 @@ export async function uploadTema(e) {
   let options = {
     method: "POST",
     body: formData,
+    headers: { "enc-type": "multipart/form-data" },
   };
 
   let res = await helpHttp().post(`${TEMAS}createTema.php`, options);
