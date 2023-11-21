@@ -65,6 +65,7 @@ export default async function infoActividad() {
     let $clone = d.importNode($template, true);
     $clone.getElementById("name-task").value = tasks[i]["nombre"];
     $clone.getElementById("desc-task").value = tasks[i]["descripcion"];
+    $clone.querySelector(".task-file-current").classList.remove("d-none");
     $clone.getElementById("task-file-current").textContent =
       tasks[i]["archivo"];
     $clone

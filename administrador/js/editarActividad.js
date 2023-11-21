@@ -17,10 +17,20 @@ export default async function editarActividad(e) {
   let asksRemove = JSON.parse(sessionStorage.getItem("list-ask-delete")) || [];
 
   for (let i = 0; i < tasksRemove.length; i++) {
-    deleteTask(tasksRemove[i]);
+    let isDelete = deleteTask(tasksRemove[i]);
+    if (!isDelete) {
+      alert(`Ocurrio un error al eliminar el entregable: ${tasksRemove[i]}`);
+      location.reload();
+      break;
+    }
   }
   for (let i = 0; i < asksRemove.length; i++) {
-    deleteAsk(asksRemove[i]);
+    let isDelete = deleteAsk(asksRemove[i]);
+    if (!isDelete) {
+      alert(`Ocurrio un error al eliminar la pregunta: ${asksRemove[i]}`);
+      location.reload();
+      break;
+    }
   }
 
   return;
@@ -91,6 +101,8 @@ async function deleteTask(id) {
   );
 
   console.log(res);
+
+  return res.err === false ? true : false;
 }
 
 async function deleteAsk(id) {
@@ -105,4 +117,5 @@ async function deleteAsk(id) {
   const res = await helpHttp().post(`${ACTIVIDADES}deleteAsk.php`, options);
 
   console.log(res);
+  return res.err === false ? true : false;
 }
