@@ -5,6 +5,20 @@ export default function removeAsk(e) {
     return;
 
   if (d.getElementById("asks-container").children.length > 1) {
+    let idAsk = e.target.getAttribute("data-ask-id") || null;
+
+    if (idAsk) {
+      if (!sessionStorage.getItem("list-ask-delete"))
+        sessionStorage.setItem("list-ask-delete", JSON.stringify([]));
+
+      idAsk = parseInt(idAsk);
+      let arr = JSON.parse(sessionStorage.getItem("list-ask-delete"));
+      arr = [...arr, idAsk];
+      sessionStorage.setItem("list-ask-delete", JSON.stringify(arr));
+      console.log(arr);
+      console.log(sessionStorage.getItem("list-ask-delete"));
+    }
+
     let numAsk = e.target.getAttribute("data-ask");
 
     let $childrens = d.getElementById("asks-container").children;

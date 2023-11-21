@@ -3,6 +3,7 @@ import addTask from "../administrador/js/addTask.js";
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
 import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
 import deleteUsuario from "../administrador/js/deleteUsuario.js";
+import { ActividadToEdit } from "../administrador/js/editarActividad.js";
 import editarCurso, { cursoToEdit } from "../administrador/js/editarCurso.js";
 import editarDepartamento from "../administrador/js/editarDepartamento.js";
 import editarEmpresa, {
@@ -14,6 +15,7 @@ import editarUsuario, {
 } from "../administrador/js/editarUsuario.js";
 import headerAdmin from "../administrador/js/headerAdmin.js";
 import headerAdminMark from "../administrador/js/headeradminMark.js";
+import infoActividad from "../administrador/js/infoActividad.js";
 import infoCurso from "../administrador/js/infoCurso.js";
 import infoDepartamento from "../administrador/js/infoDepartamento.js";
 import infoEmpresa from "../administrador/js/infoEmpresa.js";
@@ -91,6 +93,7 @@ d.addEventListener("click", (e) => {
   addAsk(e);
   removeAsk(e);
   registrarActividad(e);
+  ActividadToEdit(e);
 });
 
 d.addEventListener("change", (e) => {
@@ -114,4 +117,5 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   listadoActividades();
   addTask();
   addAsk();
+  infoActividad();
 });

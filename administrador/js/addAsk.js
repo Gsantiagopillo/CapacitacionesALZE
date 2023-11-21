@@ -7,7 +7,11 @@ const { TEMAS } = api;
 
 export default async function addAsk(e = null) {
   if (e === null) {
-    if (!location.pathname.includes("registrarActividad.html")) return;
+    if (
+      !location.pathname.includes("registrarActividad.html") &&
+      !location.pathname.includes("editarActividad.html")
+    )
+      return;
 
     // formData.append("id", sessionStorage.getItem("idTemaGO"));
 

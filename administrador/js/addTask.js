@@ -7,10 +7,14 @@ const { TEMAS } = api;
 
 export default async function addTask(e = null) {
   if (e === null) {
-    if (!location.pathname.includes("registrarActividad.html")) return;
+    if (
+      !location.pathname.includes("registrarActividad.html") &&
+      !location.pathname.includes("editarActividad.html")
+    )
+      return;
 
     const formData = new FormData();
-    formData.append("id", sessionStorage.getItem("idTemaGO"));
+    formData.append("idTema", sessionStorage.getItem("idTemaGO"));
 
     let options = {
       method: "POST",
