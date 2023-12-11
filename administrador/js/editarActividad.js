@@ -33,8 +33,61 @@ export default async function editarActividad(e) {
     }
   }
 
-  return;
+  const $taskContainer = d.getElementById("task-container");
+  const $tasks = $taskContainer.children;
 
+  for (let i = 0; i < $tasks.length; i++) {
+    let idTask = $tasks[i]
+      .querySelector("[data-task-id]")
+      .getAttribute("data-task-id");
+
+    let nameAct = $tasks[i].querySelector("#name-task").value;
+    let descAct = $tasks[i].querySelector("#desc-task").value;
+    let archivoAct = $tasks[i].querySelector("#file-task").files;
+    if (idTask) {
+      let isUpdate;
+      if (archivoAct.length > 0)
+        isUpdate = updateTask(idTask, nameAct, descAct, archivoAct[0]);
+      else isUpdate = updateTask(idTask, nameAct, descAct);
+      if (!isUpdate) {
+        alert(`Ocurrio un error al actualizar el entregable: ${idTask}`);
+        location.reload();
+        break;
+      }
+    } else {
+      let isAdd = addtask(nameAct, descAct, archivoAct[0]);
+
+      if (!isAdd) {
+        alert(`Ocurrio un error al registrar el entregable: ${nameAct}`);
+        location.reload();
+        break;
+      }
+    }
+  }
+
+  const $asksContainer = d.getElementById("task-container");
+  const $asks = $asksContainer.children;
+
+  for (let i = 0; i < $asks.length; i++) {
+    let idAsk = $asks[i]
+      .querySelector("[data-ask-id]")
+      .getAttribute("data-ask-id");
+    if (idAsk) {
+      let nameAsk = $asks[i].querySelector("#name-ask");
+      let ans1 = $asks[i].querySelector("#answer-1");
+      let ans2 = $asks[i].querySelector("#answer-2");
+      let ans3 = $asks[i].querySelector("#answer-3");
+      let ansC = $asks[i].querySelector("#answer-correct");
+      let isUpdate = updateAsk(idAsk, nameAsk, ans1, ans2, ans3, ansC);
+      if (!isUpdate) {
+        alert(`Ocurrio un error al actualizar la pregunta: ${idAsk}`);
+        location.reload();
+        break;
+      }
+    }
+  }
+
+  return;
   const $form = d.getElementById("form-edit-activity"),
     id = $form["id-tema"].value,
     nombre = $form.nombre.value;
@@ -115,6 +168,48 @@ async function deleteAsk(id) {
   };
 
   const res = await helpHttp().post(`${ACTIVIDADES}deleteAsk.php`, options);
+
+  console.log(res);
+  return res.err === false ? true : false;
+}
+
+async function updateTask(id, name, desc, archivo = null) {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("name", name);
+  formData.append("desc", desc);
+  if (video) formData.append("archivo", archivo);
+
+  let options = {
+    method: "POST",
+    body: formData,
+  };
+
+  const res = await helpHttp().post(
+    `${ACTIVIDADES}updateEntregable.php`,
+    options
+  );
+
+  console.log(res);
+
+  return res.err === false ? true : false;
+}
+
+async function updateAsk(id, name, ans1, ans2, ans3, ansC) {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("name", name);
+  formData.append("ans1", ans1);
+  formData.append("ans2", ans2);
+  formData.append("ans3", ans3);
+  formData.append("ansC", ansC);
+
+  let options = {
+    method: "POST",
+    body: formData,
+  };
+
+  const res = await helpHttp().post(`${ACTIVIDADES}updateAsk.php`, options);
 
   console.log(res);
   return res.err === false ? true : false;
