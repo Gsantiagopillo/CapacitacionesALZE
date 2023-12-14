@@ -25,7 +25,7 @@ body {
 input,
 input::placeholder {
   font-weight: 500;
-  color: #2b2b2b;
+  /* color: #2b2b2b; */
 }
 
 label {
@@ -124,6 +124,9 @@ img {
   margin-right: 0.25rem;
 }
 
+.mb-25 {
+  margin-bottom: 2.5rem;
+}
 .mt-25 {
   margin-top: 2.5rem;
 }
@@ -230,6 +233,34 @@ img {
   width: auto;
 }
 /* fin clases funcionales */
+
+.choose-assign {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 1.2rem auto;
+  border: 0.15rem solid var(--bs-link-hover-color);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+.choose-assign-child {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.choose-assign-child.selected {
+  background-color: var(--bs-link-hover-color);
+  color: #fff;
+}
+
+.choose-assign-child:nth-child(2) {
+  border-left: 0.15rem solid var(--bs-link-hover-color);
+  border-right: 0.15rem solid var(--bs-link-hover-color);
+}
 
 .create-answer {
   display: grid;
@@ -536,6 +567,10 @@ img {
     display: none;
   }
 
+  .choose-assign {
+    width: 80%;
+  }
+
   .form-info,
   .form-info-switch {
     display: grid;
@@ -587,6 +622,10 @@ img {
 }
 
 @media (min-width: 768px) {
+  .choose-assign {
+    width: 70%;
+  }
+
   .create-answer {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -619,6 +658,10 @@ img {
 }
 
 @media (min-width: 992px) {
+  .choose-assign {
+    width: 40%;
+  }
+
   .form-info-vertical {
     width: 60%;
     margin: 0 auto;

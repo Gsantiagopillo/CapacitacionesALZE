@@ -37,9 +37,8 @@ export default async function editarActividad(e) {
   const $tasks = $taskContainer.children;
 
   for (let i = 0; i < $tasks.length; i++) {
-    let idTask = $tasks[i]
-      .querySelector("[data-task-id]")
-      .getAttribute("data-task-id");
+    let idTask = $tasks[i].querySelector("[data-task-id]") || null;
+    if (idTask) idTask = idTask.getAttribute("data-task-id");
 
     let nameAct = $tasks[i].querySelector("#name-task").value;
     let descAct = $tasks[i].querySelector("#desc-task").value;
@@ -55,7 +54,7 @@ export default async function editarActividad(e) {
         break;
       }
     } else {
-      let isAdd = addtask(nameAct, descAct, archivoAct[0]);
+      let isAdd = addTask(nameAct, descAct, archivoAct[0], idActividad);
 
       if (!isAdd) {
         alert(`Ocurrio un error al registrar el entregable: ${nameAct}`);
@@ -65,40 +64,47 @@ export default async function editarActividad(e) {
     }
   }
 
-  const $asksContainer = d.getElementById("task-container");
+  const $asksContainer = d.getElementById("asks-container");
   const $asks = $asksContainer.children;
 
   for (let i = 0; i < $asks.length; i++) {
-    let idAsk = $asks[i]
-      .querySelector("[data-ask-id]")
-      .getAttribute("data-ask-id");
+    let idAsk = $asks[i].querySelector("[data-ask-id]") || null;
+    let nameAsk = $asks[i].querySelector("#name-ask").value;
+    let ans1 = $asks[i].querySelector("#answer-1").value;
+    let ans2 = $asks[i].querySelector("#answer-2").value;
+    let ans3 = $asks[i].querySelector("#answer-3").value;
+    let ansC = $asks[i].querySelector("#answer-correct").value;
     if (idAsk) {
-      let nameAsk = $asks[i].querySelector("#name-ask");
-      let ans1 = $asks[i].querySelector("#answer-1");
-      let ans2 = $asks[i].querySelector("#answer-2");
-      let ans3 = $asks[i].querySelector("#answer-3");
-      let ansC = $asks[i].querySelector("#answer-correct");
+      idAsk = idAsk.getAttribute("data-ask-id");
       let isUpdate = updateAsk(idAsk, nameAsk, ans1, ans2, ans3, ansC);
       if (!isUpdate) {
         alert(`Ocurrio un error al actualizar la pregunta: ${idAsk}`);
         location.reload();
         break;
       }
+    } else {
+      let isAdd = addAsk(nameAsk, ans1, ans2, ans3, ansC, idActividad);
+
+      if (!isAdd) {
+        alert(`Ocurrio un error al registrar la pregunta: ${nameAsk}`);
+        location.reload();
+        break;
+      }
     }
   }
 
-  return;
   const $form = d.getElementById("form-edit-activity"),
-    id = $form["id-tema"].value,
-    nombre = $form.nombre.value;
+    nombre = $form.nombre.value,
+    desc = $form.description.value;
 
   const formData = new FormData();
 
-  formData.append("id", id);
+  formData.append("id", idActividad);
   formData.append("nombre", nombre);
+  formData.append("descripcion", desc);
 
-  if ($form.logo.files.length > 0) {
-    const logo = $form["logo"].files[0];
+  if ($form["video"].files.length > 0) {
+    const logo = $form["video"].files[0];
     formData.append("logo", logo);
   }
 
@@ -110,8 +116,8 @@ export default async function editarActividad(e) {
     body: formData,
   };
 
-  let res = await helpHttp().post(`${TEMAS}editTema.php`, options);
-  console.log(res);
+  let res = await helpHttp().post(`${ACTIVIDADES}editActividad.php`, options);
+  // console.log(res);
 
   if (!res.err) {
     if (res["update"] === false) {
@@ -119,10 +125,10 @@ export default async function editarActividad(e) {
       $load.style.display = "none";
       return;
     }
-    alert(`Tema: ${res.nombre} actualizado`);
-    location.replace(`${ADMINS}indexadmin.html`);
+    alert(`Actividad: ${res.nombre} actualizada`);
+    location.reload();
   } else {
-    alert("ocurrio un error al actualizar el tema");
+    alert("ocurrio un error al actualizar la actividad");
     $load.style.display = "none";
   }
 }
@@ -153,7 +159,7 @@ async function deleteTask(id) {
     options
   );
 
-  console.log(res);
+  // console.log(res);
 
   return res.err === false ? true : false;
 }
@@ -169,7 +175,7 @@ async function deleteAsk(id) {
 
   const res = await helpHttp().post(`${ACTIVIDADES}deleteAsk.php`, options);
 
-  console.log(res);
+  // console.log(res);
   return res.err === false ? true : false;
 }
 
@@ -190,7 +196,7 @@ async function updateTask(id, name, desc, archivo = null) {
     options
   );
 
-  console.log(res);
+  // console.log(res);
 
   return res.err === false ? true : false;
 }
@@ -211,6 +217,51 @@ async function updateAsk(id, name, ans1, ans2, ans3, ansC) {
 
   const res = await helpHttp().post(`${ACTIVIDADES}updateAsk.php`, options);
 
-  console.log(res);
+  // console.log(res);
+  return res.err === false ? true : false;
+}
+
+async function addTask(nameAct, descAct, archivoAct, idActividad) {
+  const formData = new FormData();
+  formData.append("idActividad", idActividad);
+  formData.append("nombre", nameAct);
+  formData.append("desc", descAct);
+  formData.append("file", archivoAct);
+
+  let options = {
+    method: "POST",
+    body: formData,
+  };
+
+  const res = await helpHttp().post(
+    `${ACTIVIDADES}createEntregable.php`,
+    options
+  );
+
+  // console.log(res);
+
+  return res.err === false ? true : false;
+}
+
+async function addAsk(nameAsk, ans1, ans2, ans3, ansC, idActividad) {
+  const formData = new FormData();
+  formData.append("idActividad", idActividad);
+  formData.append("pregunta", nameAsk);
+  formData.append("ans1", ans1);
+  formData.append("ans2", ans2);
+  formData.append("ans3", ans3);
+  formData.append("anscorrect", ansC);
+
+  let options = {
+    method: "POST",
+    body: formData,
+  };
+
+  const res = await helpHttp().post(
+    `${ACTIVIDADES}createFormulario.php`,
+    options
+  );
+
+  // console.log(res);
   return res.err === false ? true : false;
 }

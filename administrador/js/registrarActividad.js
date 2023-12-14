@@ -17,7 +17,6 @@ export default async function registrarActividad(e) {
 }
 
 export async function uploadActividad(e) {
-  console.log("ENTRE");
   if (!e.target.matches("#form-create-activity")) return;
 
   idTema = sessionStorage.getItem("idTemaGO");

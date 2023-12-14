@@ -1,9 +1,12 @@
 import addAsk from "../administrador/js/addAsk.js";
 import addTask from "../administrador/js/addTask.js";
+import chooseAssign from "../administrador/js/chooseAssign.js";
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
 import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
 import deleteUsuario from "../administrador/js/deleteUsuario.js";
-import { ActividadToEdit } from "../administrador/js/editarActividad.js";
+import editarActividad, {
+  ActividadToEdit,
+} from "../administrador/js/editarActividad.js";
 import editarCurso, { cursoToEdit } from "../administrador/js/editarCurso.js";
 import editarDepartamento from "../administrador/js/editarDepartamento.js";
 import editarEmpresa, {
@@ -68,6 +71,7 @@ d.addEventListener("submit", (e) => {
   editarCurso(e);
   editarTema(e);
   uploadActividad(e);
+  editarActividad(e);
 });
 
 d.addEventListener("click", (e) => {
@@ -94,6 +98,7 @@ d.addEventListener("click", (e) => {
   removeAsk(e);
   registrarActividad(e);
   ActividadToEdit(e);
+  chooseAssign(e);
 });
 
 d.addEventListener("change", (e) => {
