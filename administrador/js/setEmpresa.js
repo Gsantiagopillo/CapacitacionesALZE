@@ -10,7 +10,8 @@ export default async function setEmpresa(band = "") {
     location.pathname.includes("/registrarUsuario.html") ||
     band.includes("editarUsuario") ||
     location.pathname.includes("/registrarEstudiante.html") ||
-    location.pathname.includes("/registrarDepartamento.html")
+    location.pathname.includes("/registrarDepartamento.html") ||
+    location.pathname.includes("/AsignarCurso.html")
   ) {
     let json = await helpHttp().post(`${EMPRESAS}getEmpresas.php`);
 
@@ -18,7 +19,9 @@ export default async function setEmpresa(band = "") {
       d.getElementById("form-create-user") ||
       d.getElementById("form-edit-user") ||
       d.getElementById("form-create-student") ||
-      d.getElementById("form-create-depto");
+      d.getElementById("form-create-depto") ||
+      d.getElementById("form-assign-course");
+
     const $select = $form.empresa;
     const $fragmento = document.createDocumentFragment();
 

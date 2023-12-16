@@ -1,5 +1,7 @@
 import addAsk from "../administrador/js/addAsk.js";
 import addTask from "../administrador/js/addTask.js";
+import assignChange from "../administrador/js/assignChange.js";
+import assignCourse from "../administrador/js/assignCourse.js";
 import chooseAssign from "../administrador/js/chooseAssign.js";
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
 import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
@@ -51,6 +53,7 @@ import removeAsk from "../administrador/js/removeAsk.js";
 import removeTask from "../administrador/js/removeTask.js";
 import setDepartamento from "../administrador/js/setDepartamento.js";
 import setEmpresa from "../administrador/js/setEmpresa.js";
+import setUsuario from "../administrador/js/setUsuario.js";
 import login from "./login.js";
 import { pushHtml } from "./pushHtml.js";
 import viewPassw from "./viewPassw.js";
@@ -103,6 +106,7 @@ d.addEventListener("click", (e) => {
 
 d.addEventListener("change", (e) => {
   setDepartamento(e);
+  setUsuario(e);
 });
 
 d.addEventListener("DOMContentLoaded", async (e) => {
@@ -123,4 +127,6 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   addTask();
   addAsk();
   infoActividad();
+  assignChange();
+  assignCourse();
 });

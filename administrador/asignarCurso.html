@@ -24,34 +24,53 @@
     <h4 class="text-center fw-bold">Asignar Curso</h4>
 
     <section class="choose-assign">
-      <article class="choose-assign-child">EMPRESA</article>
-      <article class="choose-assign-child">DEPTO</article>
-      <article class="choose-assign-child">USUARIO</article>
+      <article class="choose-assign-child assign-empresa">EMPRESA</article>
+      <article class="choose-assign-child assign-depto">DEPTO</article>
+      <article class="choose-assign-child assign-user">USUARIO</article>
     </section>
 
     <form id="form-assign-course" class="form-info-vertical" autocomplete="off">
 
-      <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona la empresa:</h5>
-      <div class="input-field">
-        <select>
-          <option value="" disabled selected>Elije la empresa</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-      </div>
+      <article id="choose-assign-empresa" class="d-none">
+        <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona la empresa:</h5>
+        <div class="input-field">
+          <select id="empresa" required>
+            <option value="" disabled selected>Elije la empresa</option>
+          </select>
+        </div>
+      </article>
 
-      <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona el departamento:</h5>
-      <div class="input-field">
-        <select>
-          <option value="" disabled selected>Elije el departamento</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-      </div>
+      <article id="choose-assign-depto" class="d-none">
+        <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona el departamento:</h5>
+        <div class="input-field">
+          <select id="departamento">
+            <option value="" disabled selected>Elije el departamento</option>
+          </select>
+        </div>
+      </article>
 
-      <button class="mt-25 btn waves-effect waves-ligh" type="submit">Asignar
+      <article id="choose-assign-user" class="d-none">
+        <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona al usuario:</h5>
+        <div class="input-field">
+          <select id="usuario">
+            <option value="" disabled selected>Elije el usuario</option>
+          </select>
+        </div>
+      </article>
+
+      <h5 class="mt-25" style="font-size: 1.5rem;">Selecciona los cursos:</h5>
+      <article class="assign-course-container">
+        <template id="template-assign-course">
+          <p>
+            <label>
+              <input type="checkbox" class="filled-in" />
+              <span>Filled in</span>
+            </label>
+          </p>
+        </template>
+      </article>
+
+      <button class="mt-25 btn waves-effect waves-ligh" type="submit" id="asignar">Asignar
         <i class="material-icons right">add_to_photos</i>
       </button>
 

@@ -1,3 +1,5 @@
+import assignChange from "./assignChange.js";
+
 const d = document;
 
 export default function chooseAssign(e) {
@@ -14,5 +16,5 @@ export default function chooseAssign(e) {
   });
 
   e.target.classList.add("selected");
-  sessionStorage.setItem("assign-selected", e.target.textContent);
+  assignChange(e.target.textContent);
 }

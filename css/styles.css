@@ -234,6 +234,12 @@ img {
 }
 /* fin clases funcionales */
 
+.assign-course-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
 .choose-assign {
   display: flex;
   justify-content: space-between;
@@ -622,6 +628,10 @@ img {
 }
 
 @media (min-width: 768px) {
+  .assign-course-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .choose-assign {
     width: 70%;
   }
@@ -658,6 +668,10 @@ img {
 }
 
 @media (min-width: 992px) {
+  .assign-course-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .choose-assign {
     width: 40%;
   }

@@ -9,7 +9,8 @@ export default async function setDepartamento(e, id = null) {
   if (
     !location.pathname.includes("/registrarUsuario.html") &&
     !location.pathname.includes("/editarUsuario.html") &&
-    !location.pathname.includes("/registrarEstudiante.html")
+    !location.pathname.includes("/registrarEstudiante.html") &&
+    !location.pathname.includes("/AsignarCurso.html")
   )
     return;
 
@@ -32,7 +33,8 @@ export default async function setDepartamento(e, id = null) {
   const $form =
     d.getElementById("form-create-user") ||
     d.getElementById("form-edit-user") ||
-    d.getElementById("form-create-student");
+    d.getElementById("form-create-student") ||
+    d.getElementById("form-assign-course");
 
   const $select = $form.departamento;
 
