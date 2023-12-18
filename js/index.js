@@ -2,6 +2,7 @@ import addAsk from "../administrador/js/addAsk.js";
 import addTask from "../administrador/js/addTask.js";
 import assignChange from "../administrador/js/assignChange.js";
 import assignCourse from "../administrador/js/assignCourse.js";
+import assignMarkCourse from "../administrador/js/assignMarkCourse.js";
 import chooseAssign from "../administrador/js/chooseAssign.js";
 import deleteDepartamento from "../administrador/js/deleteDepartamento.js";
 import deleteEmpresa from "../administrador/js/deleteEmpresa.js";
@@ -107,6 +108,7 @@ d.addEventListener("click", (e) => {
 d.addEventListener("change", (e) => {
   setDepartamento(e);
   setUsuario(e);
+  assignMarkCourse(e);
 });
 
 d.addEventListener("DOMContentLoaded", async (e) => {
@@ -128,5 +130,4 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   addAsk();
   infoActividad();
   assignChange();
-  assignCourse();
 });

@@ -11,6 +11,7 @@ export default async function assignCourse() {
   let json = await helpHttp().post(`${CURSOS}getCursos.php`);
 
   const $container = d.querySelector(".assign-course-container");
+  $container.innerHTML = "";
 
   if (json.length === 0) {
     const $h5 = d.createElement("h5");
@@ -21,8 +22,6 @@ export default async function assignCourse() {
     d.getElementById("asignar").setAttribute("disabled", true);
     return;
   }
-
-  let courseuser = await helpHttp().post(`${CURSOS}getCursosUser.php`);
 
   const $fragmento = d.createDocumentFragment();
   const $template = d.getElementById("template-assign-course").content;
