@@ -48,7 +48,7 @@ export default async function assignCourseSubmit(e) {
 
   let courses = getCoursesChecked();
 
-  console.log(courses);
+  console.log(JSON.stringify(courses));
 
   const formData = new FormData();
 
@@ -67,6 +67,10 @@ export default async function assignCourseSubmit(e) {
   let json = await res.json();
 
   console.log(json);
+
+  !json.err
+    ? alert("Los cursos han sido asignados")
+    : alert("Ha ocurrdo un error al asignar los cursos");
 }
 
 function getCoursesChecked() {
@@ -74,7 +78,8 @@ function getCoursesChecked() {
   let courses = [];
 
   $courses.forEach((el) => {
-    if (el.checked) courses.push(parseInt(el.getAttribute("data-course-id")));
+    if (el.checked && el.disabled === false)
+      courses.push(parseInt(el.getAttribute("data-course-id")));
   });
 
   return courses;

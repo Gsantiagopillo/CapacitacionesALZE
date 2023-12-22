@@ -11,7 +11,7 @@ export default function login(e) {
     passw = d.getElementById("passw").value,
     sessionActive = d.getElementById("session").checked;
 
-  const { ADMINS, LOGIN, KEY_SESSION } = api;
+  const { ADMINS, STUDENTS, LOGIN, KEY_SESSION } = api;
   // console.log(`${LOGIN}login.php`);
 
   const formData = new FormData();
@@ -50,7 +50,7 @@ export default function login(e) {
           location.replace(`${ADMINS}indexadmin.html`);
         } else {
           console.log("case students");
-          // location.replace(`${ADMINS}indexadmin.html`);
+          location.replace(`${STUDENTS}indexstudent.html`);
         }
       } else {
         if (json.causa === "1")
