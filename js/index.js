@@ -56,6 +56,7 @@ import removeTask from "../administrador/js/removeTask.js";
 import setDepartamento from "../administrador/js/setDepartamento.js";
 import setEmpresa from "../administrador/js/setEmpresa.js";
 import setUsuario from "../administrador/js/setUsuario.js";
+import misCursos, { goToCursoStudent } from "../estudiante/js/misCursos.js";
 import login from "./login.js";
 import { pushHtml } from "./pushHtml.js";
 import viewPassw from "./viewPassw.js";
@@ -78,6 +79,8 @@ d.addEventListener("submit", (e) => {
   uploadActividad(e);
   editarActividad(e);
   assignCourseSubmit(e);
+
+  // SECTION STUDENTS
 });
 
 d.addEventListener("click", (e) => {
@@ -105,6 +108,10 @@ d.addEventListener("click", (e) => {
   registrarActividad(e);
   ActividadToEdit(e);
   chooseAssign(e);
+
+  // SECTION STUDENT
+
+  goToCursoStudent(e);
 });
 
 d.addEventListener("change", (e) => {
@@ -132,4 +139,8 @@ d.addEventListener("DOMContentLoaded", async (e) => {
   addAsk();
   infoActividad();
   assignChange();
+
+  //SECTION ESTUDENTS
+
+  misCursos();
 });

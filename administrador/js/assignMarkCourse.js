@@ -8,6 +8,9 @@ const { CURSOS } = api;
 
 export default async function assignMarkCourse(e) {
   if (!location.pathname.includes("/AsignarCurso.html")) return;
+  console.log(e);
+
+  if (e.target.matches("input[type='checkbox']")) return;
 
   await assignCourse();
 
@@ -56,8 +59,6 @@ async function markEmpresa(e, Courses, band = null) {
     options
   );
 
-  console.log(courseEmpresa);
-
   courseEmpresa.forEach((el) => {
     for (let i = 0; i < Courses.length; i++) {
       let dataId = Courses[i].getAttribute("data-course-id");
@@ -83,8 +84,6 @@ async function markDepto(e, Courses, band = null) {
     options
   );
 
-  console.log(courseDepto);
-
   courseDepto.forEach((el) => {
     for (let i = 0; i < Courses.length; i++) {
       let dataId = Courses[i].getAttribute("data-course-id");
@@ -107,8 +106,6 @@ async function markUser(e, Courses, band = null) {
     body: formData,
   };
   let courseUser = await helpHttp().post(`${CURSOS}getCursosUser.php`, options);
-
-  console.log(courseUser);
 
   courseUser.forEach((el) => {
     for (let i = 0; i < Courses.length; i++) {

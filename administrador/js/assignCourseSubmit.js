@@ -48,8 +48,6 @@ export default async function assignCourseSubmit(e) {
 
   let courses = getCoursesChecked();
 
-  console.log(JSON.stringify(courses));
-
   const formData = new FormData();
 
   formData.append("id", idToAssign);
@@ -65,8 +63,6 @@ export default async function assignCourseSubmit(e) {
   // let json = await helpHttp().post(`${CURSOS}assignCursos.php`, options);
   let res = await fetch(`${CURSOS}assignCurso.php`, options);
   let json = await res.json();
-
-  console.log(json);
 
   !json.err
     ? alert("Los cursos han sido asignados")
