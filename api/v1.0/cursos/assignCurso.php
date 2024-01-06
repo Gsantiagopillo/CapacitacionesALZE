@@ -3,7 +3,7 @@ require "../conexion.php";
 
 $id = $_POST['id'];
 $assignTo = $_POST['assignTo'];
-
+$aux = 0;
 
 if ($assignTo == "EMPRESA") {
   $delete = mysqli_query($mysqli, "delete from curso_empresa where id_empresa='$id'");
@@ -28,27 +28,40 @@ if ($assignTo == "EMPRESA") {
     $usersEmpresa = [];
     while ($row1 = $result1->fetch_assoc())   $usersEmpresa[] = $row1;
 
+
     foreach ($usersEmpresa as $el2) {
       $userEmpresa = $el2['id'];
+      $aux = "$userEmpresa-$el";
       $sql2 = "select id from curso_usuario where id_estudiante='$userEmpresa' AND id_curso='$el' ";
-    }
+      $result2 = $mysqli->query($sql2);
+      $row2 = $result2->fetch_assoc();
 
-    // $sqlcursos = "select curso_usuario.id, curso_usuario.id_curso, curso_usuario.id_estudiante from curso_usuario  inner join usuarios on usuarios.id_empresa='$id' inner join curso_usuario on curso_usuario.id_curso='$el'";
-    // $resultcursos = $mysqli->query($sqlcursos);
-    // $usersWCourse = [];
-    // while ($rowcursos = $resultcursos->fetch_assoc())   $usersWCourse[] = $rowcursos;
+      if ($row2) {
+        $idRow = $row2['id'];
+        $update = mysqli_query($mysqli, "update curso_usuario set type_assign='EMPRESA', id_assign='$id', status_course='1' where id=$idRow");
 
-    // // $exist=
+        if (!$update) {
+          $res = array(
+            "err" => !$update,
+            "statusText" => "error al asignar cursos"
+          );
 
+          echo json_encode($res);
+          // break;
+        }
+      } else {
+        $insert = mysqli_query($mysqli, "insert into curso_usuario(id_curso,id_estudiante,type_assign,id_assign,status_course) values ('$el','$userEmpresa','EMPRESA','$id','1' )");
 
-    if (!$insert) {
-      $res = array(
-        "err" => !$insert,
-        "statusText" => "error al asignar cursos"
-      );
+        if (!$insert) {
+          $res = array(
+            "err" => !$insert,
+            "statusText" => "error al asignar cursos"
+          );
 
-      echo json_encode($res);
-      break;
+          echo json_encode($res);
+          // break;
+        }
+      }
     }
   }
 }
@@ -112,6 +125,7 @@ if ($assignTo == "USER") {
 
 $res = array(
   "err" => false,
+  "aux" => $aux,
   "statusText" => "cursos asignados"
 );
 
